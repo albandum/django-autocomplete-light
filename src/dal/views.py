@@ -78,6 +78,11 @@ class BaseQuerySetView(ViewMixin, BaseListView):
         """Return True if the user has the permission to add a model."""
         if not request.user.is_authenticated():
             return False
+        
+        # MAKE SCHOOL EDITABLE BY EVERYBODY
+        print self.get_queryset().model
+        if "school" in self.get_queryset().model.name:
+            return True
 
         opts = self.get_queryset().model._meta
         codename = get_permission_codename('add', opts)
