@@ -80,8 +80,7 @@ class BaseQuerySetView(ViewMixin, BaseListView):
             return False
         
         # MAKE SCHOOL EDITABLE BY EVERYBODY
-        print self.get_queryset().model
-        if "school" in self.get_queryset().model.name:
+        if "school" in str(self.get_queryset().model._meta):
             return True
 
         opts = self.get_queryset().model._meta
